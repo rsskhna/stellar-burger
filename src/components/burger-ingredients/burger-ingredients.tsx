@@ -6,6 +6,7 @@ import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
 import { getIngredientsSelector } from '../../services/ingredientsSlice';
 import { useSelector } from '../../services/store';
+import { Preloader } from '@ui';
 
 export const BurgerIngredients: FC = () => {
   /** TODO: взять переменные из стора */
@@ -13,19 +14,25 @@ export const BurgerIngredients: FC = () => {
   const titleBunRef = useRef<HTMLHeadingElement>(null);
   const titleMainRef = useRef<HTMLHeadingElement>(null);
   const titleSaucesRef = useRef<HTMLHeadingElement>(null);
-  const ingredients = useSelector(getIngredientsSelector).ingredients;
+  const ingredients = useSelector(getIngredientsSelector);
+  // const loading = useSelector(getLoadingSelector);
+  // const error = useSelector(getErrorSelector);
 
-  console.log(ingredients);
-
-  const buns = ingredients.filter((ingredient: TIngredient) => {
-    ingredient.type === 'bun';
-  });
-  const mains = ingredients.filter((ingredient: TIngredient) => {
-    ingredient.type === 'main';
-  });
-  const sauces = ingredients.filter((ingredient: TIngredient) => {
-    ingredient.type === 'sauce';
-  });
+  const buns = useMemo(
+    (): TIngredient[] =>
+      ingredients.filter((ingredient) => ingredient.type === 'bun'),
+    [ingredients]
+  );
+  const mains = useMemo(
+    (): TIngredient[] =>
+      ingredients.filter((ingredient) => ingredient.type === 'main'),
+    [ingredients]
+  );
+  const sauces = useMemo(
+    (): TIngredient[] =>
+      ingredients.filter((ingredient) => ingredient.type === 'sauce'),
+    [ingredients]
+  );
 
   const [bunsRef, inViewBuns] = useInView({
     threshold: 0
@@ -58,6 +65,10 @@ export const BurgerIngredients: FC = () => {
     if (tab === 'sauce')
       titleSaucesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // if (loading && !error) {
+  //   return <Preloader />;
+  // }
 
   return (
     <BurgerIngredientsUI
