@@ -25,7 +25,7 @@ export const burgerConstructorSlice = createSlice({
   reducers: {},
   selectors: {
     getBurgerBun: (state) => state.constructorItems.bun,
-    getBurgerIngredients: (state) => state.constructorItems.ingredients,
+    getBurgerIngredients: (state) => state.constructorItems.ingredients
   },
   extraReducers: (builder) => {}
 });
