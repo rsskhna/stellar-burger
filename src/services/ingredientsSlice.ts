@@ -24,7 +24,7 @@ export const ingredientsSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    getIngredientsSelector: (state) => state.ingredients
+    git : (state) => state.ingredients
     // getLoadingSelector: (state) => state.loading,
     // getErrorSelector: (state) => state.error
   },

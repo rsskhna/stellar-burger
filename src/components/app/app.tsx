@@ -15,10 +15,9 @@ import styles from './app.module.css';
 import { AppHeader, Modal, OrderInfo } from '@components';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
-import { AppDispatch, useDispatch } from '../../services/store';
+import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/ingredientsSlice';
-import { getBurgerBun } from '../../services/burgerConstructorSlice';
 
 const App = () => {
   const navigate = useNavigate();
