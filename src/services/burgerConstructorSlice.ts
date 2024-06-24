@@ -3,8 +3,8 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
 type TBurgerConstructorState = {
   constructorItems: {
-    bun: TIngredient | null;
-    ingredients: TIngredient[];
+    bun: TConstructorIngredient | null;
+    ingredients: TConstructorIngredient[];
   };
   loading: boolean;
   error: string | null;
@@ -24,7 +24,7 @@ export const burgerConstructorSlice = createSlice({
   initialState,
   reducers: {
     addBurgerComponent: {
-      reducer: (state, action: PayloadAction<TIngredient>) => {
+      reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
         if (action.payload.type === 'bun') {
           state.constructorItems.bun = action.payload;
         } else {
@@ -44,16 +44,25 @@ export const burgerConstructorSlice = createSlice({
       const arrOfIngredients = state.constructorItems.ingredients;
       const ingredientIndex = arrOfIngredients.indexOf(action.payload);
       arrOfIngredients.splice(ingredientIndex, 1);
+    },
+    changeIngredientsState: (
+      state,
+      action: PayloadAction<TConstructorIngredient[]>
+    ) => {
+      state.constructorItems.ingredients = action.payload;
     }
   },
   selectors: {
-    getBurgerBun: (state) => state.constructorItems.bun,
-    getBurgerIngredients: (state) => state.constructorItems.ingredients
+    selectBurgerBun: (state) => state.constructorItems.bun,
+    selectBurgerIngredients: (state) => state.constructorItems.ingredients
   }
 });
 
-export const { getBurgerBun, getBurgerIngredients } =
+export const { selectBurgerBun, selectBurgerIngredients } =
   burgerConstructorSlice.selectors;
-export const { addBurgerComponent, deleteBurgerComponent } =
-  burgerConstructorSlice.actions;
+export const {
+  addBurgerComponent,
+  deleteBurgerComponent,
+  changeIngredientsState
+} = burgerConstructorSlice.actions;
 export const burgerConstructorReducer = burgerConstructorSlice.reducer;

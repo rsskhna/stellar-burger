@@ -4,8 +4,8 @@ import { TIngredient } from '@utils-types';
 import { IngredientsCategoryUI } from '../ui/ingredients-category';
 import { useSelector } from '../../services/store';
 import {
-  getBurgerBun,
-  getBurgerIngredients
+  selectBurgerBun,
+  selectBurgerIngredients
 } from '../../services/burgerConstructorSlice';
 
 export const IngredientsCategory = forwardRef<
@@ -13,8 +13,8 @@ export const IngredientsCategory = forwardRef<
   TIngredientsCategoryProps
 >(({ title, titleRef, ingredients }, ref) => {
   const burgerConstructor = {
-    bun: useSelector(getBurgerBun),
-    ingredients: useSelector(getBurgerIngredients)
+    bun: useSelector(selectBurgerBun),
+    ingredients: useSelector(selectBurgerIngredients)
   };
 
   const ingredientsCounters = useMemo(() => {

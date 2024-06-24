@@ -3,15 +3,15 @@ import { TIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector } from '../../services/store';
 import {
-  getBurgerBun,
-  getBurgerIngredients
+  selectBurgerBun,
+  selectBurgerIngredients
 } from '../../services/burgerConstructorSlice';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = {
-    bun: useSelector(getBurgerBun),
-    ingredients: useSelector(getBurgerIngredients)
+    bun: useSelector(selectBurgerBun),
+    ingredients: useSelector(selectBurgerIngredients)
   };
 
   const orderRequest = false;

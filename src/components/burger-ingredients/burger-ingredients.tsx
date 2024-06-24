@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { TIngredient, TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
-import { getIngredientsSelector } from '../../services/ingredientsSlice';
+import { selectIngredients } from '../../services/ingredientsSlice';
 import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 
@@ -14,7 +14,7 @@ export const BurgerIngredients: FC = () => {
   const titleBunRef = useRef<HTMLHeadingElement>(null);
   const titleMainRef = useRef<HTMLHeadingElement>(null);
   const titleSaucesRef = useRef<HTMLHeadingElement>(null);
-  const ingredients = useSelector(getIngredientsSelector);
+  const ingredients = useSelector(selectIngredients);
   // const loading = useSelector(getLoadingSelector);
   // const error = useSelector(getErrorSelector);
 
