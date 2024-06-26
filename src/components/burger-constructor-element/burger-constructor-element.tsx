@@ -3,7 +3,7 @@ import { BurgerConstructorElementUI } from '@ui';
 import { BurgerConstructorElementProps } from './type';
 import { useDispatch, useSelector } from '../../services/store';
 import {
-  changeIngredientsState,
+  setIngredientsState,
   deleteBurgerComponent,
   selectBurgerIngredients
 } from '../../services/burgerConstructorSlice';
@@ -16,13 +16,13 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
     const handleMoveDown = () => {
       arrOfIngredients[index] = arrOfIngredients[index + 1];
       arrOfIngredients[index + 1] = ingredient;
-      dispatch(changeIngredientsState(arrOfIngredients));
+      dispatch(setIngredientsState(arrOfIngredients));
     };
 
     const handleMoveUp = () => {
       arrOfIngredients[index] = arrOfIngredients[index - 1];
       arrOfIngredients[index - 1] = ingredient;
-      dispatch(changeIngredientsState(arrOfIngredients));
+      dispatch(setIngredientsState(arrOfIngredients));
     };
 
     const handleClose = () => {

@@ -25,8 +25,8 @@ export const ingredientsSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    selectIngredients: (state) => state.ingredients
-    // getLoadingSelector: (state) => state.loading,
+    selectIngredients: (state) => state.ingredients,
+    selectLoading: (state) => state.loading
     // getErrorSelector: (state) => state.error
   },
   extraReducers: (builder) => {
@@ -47,4 +47,7 @@ export const ingredientsSlice = createSlice({
 });
 
 export const ingredientsReducer = ingredientsSlice.reducer;
-export const { selectIngredients } = ingredientsSlice.selectors;
+export const { selectIngredients, selectLoading } = ingredientsSlice.selectors;
+export const selectIngredientById =
+  (id: string | undefined) => (state: RootState) =>
+    state.ingredients.ingredients.find((item) => item._id === id);

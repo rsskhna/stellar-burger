@@ -45,7 +45,7 @@ export const burgerConstructorSlice = createSlice({
       const ingredientIndex = arrOfIngredients.indexOf(action.payload);
       arrOfIngredients.splice(ingredientIndex, 1);
     },
-    changeIngredientsState: (
+    setIngredientsState: (
       state,
       action: PayloadAction<TConstructorIngredient[]>
     ) => {
@@ -63,6 +63,6 @@ export const { selectBurgerBun, selectBurgerIngredients } =
 export const {
   addBurgerComponent,
   deleteBurgerComponent,
-  changeIngredientsState
+  setIngredientsState
 } = burgerConstructorSlice.actions;
 export const burgerConstructorReducer = burgerConstructorSlice.reducer;
