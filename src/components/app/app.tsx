@@ -159,7 +159,7 @@ const App = () => {
                 }}
                 title={'Детали ингредиента'}
               >
-                <OrderInfo />
+                <IngredientDetails />
               </Modal>
             }
           />
