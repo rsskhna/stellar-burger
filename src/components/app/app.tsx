@@ -19,6 +19,7 @@ import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/ingredientsSlice';
 import { getFeeds } from '../../services/feedsSlice';
+import { checkUserAuth } from '../../services/userSlice';
 
 const App = () => {
   const navigate = useNavigate();
@@ -30,6 +31,10 @@ const App = () => {
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(getFeeds());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(checkUserAuth());
   }, [dispatch]);
 
   return (
@@ -70,7 +75,7 @@ const App = () => {
         <Route
           path='/login'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute onlyUnAuth>
               <Login />
             </ProtectedRoute>
           }
@@ -78,7 +83,7 @@ const App = () => {
         <Route
           path='/register'
           element={
-            <ProtectedRoute>
+            <ProtectedRoute onlyUnAuth>
               <Register />
             </ProtectedRoute>
           }
