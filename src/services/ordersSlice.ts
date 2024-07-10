@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
+import {
+  getOrderByNumberApi,
+  getOrdersApi,
+  orderBurgerApi,
+  TNewOrderResponse
+} from '@api';
 import { RootState } from './store';
-import { TOrder } from '@utils-types';
+import { TConstructorIngredient, TOrder } from '@utils-types';
 
 export const getOrders = createAsyncThunk(
   'orders/getAll',
@@ -13,32 +18,55 @@ export const placeOrder = createAsyncThunk(
   async (data: string[]) => await orderBurgerApi(data)
 );
 
-export const getOrderByNumber = createAsyncThunk(
-  'orders/getOrder',
-  async (number: number) => await getOrderByNumberApi(number)
-);
-
-type TOrdersState = {
+type TOrderState = {
   orders: TOrder[];
+  orderModalData: TOrder | null;
+  orderRequest: boolean;
+  loading: boolean;
+  error: string | null;
 };
 
-const initialState: TOrdersState = {
-  orders: []
+const initialState: TOrderState = {
+  orders: [],
+  orderModalData: null,
+  orderRequest: false,
+  loading: false,
+  error: null
 };
 
-export const ordersSlice = createSlice({
-  name: 'orders',
+export const orderSlice = createSlice({
+  name: 'order',
   initialState,
   reducers: {},
-  selectors: {},
+  selectors: {
+    selectOrders: (state) => state.orders,
+    selectOrderModalData: (state) => state.orderModalData,
+    selectOrderRequest: (state) => state.orderRequest
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(getOrders.pending, (state) => {})
-      .addCase(getOrders.rejected, (state, action) => {})
-      .addCase(getOrders.fulfilled, (state, action) => {});
+      .addCase(placeOrder.pending, (state) => {
+        state.orderRequest = true;
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(placeOrder.rejected, (state, action) => {
+        state.orderRequest = false;
+        state.loading = false;
+        state.error = action.error.message ? action.error.message : null;
+      })
+      .addCase(placeOrder.fulfilled, (state, action) => {
+        state.orderModalData = action.payload.order;
+        state.orderRequest = false;
+        state.loading = false;
+      })
+      .addCase(getOrders.fulfilled, (state, action) => {
+        state.orders = action.payload;
+      });
   }
 });
 
-export const ordersReducer = ordersSlice.reducer;
+export const orderReducer = orderSlice.reducer;
 
-export const {} = ordersSlice.selectors;
+export const { selectOrders, selectOrderModalData, selectOrderRequest } =
+  orderSlice.selectors;

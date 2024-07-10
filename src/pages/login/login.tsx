@@ -6,12 +6,13 @@ import {
   loginUser,
   selectIsAuthenticated
 } from '../../services/userSlice';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
@@ -22,10 +23,11 @@ export const Login: FC = () => {
       return;
     }
     dispatch(loginUser({ email, password }));
+    navigate('/');
   };
 
   if (isAuthenticated) {
-    return <Navigate to={'/profile'} />;
+    navigate('/profile');
   }
 
   return (
