@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
 import { RootState } from './store';
+import { TOrder } from '@utils-types';
 
 export const getOrders = createAsyncThunk(
   'orders/getAll',
@@ -17,9 +18,13 @@ export const getOrderByNumber = createAsyncThunk(
   async (number: number) => await getOrderByNumberApi(number)
 );
 
-type TOrdersState = {};
+type TOrdersState = {
+  orders: TOrder[];
+};
 
-const initialState: TOrdersState = {};
+const initialState: TOrdersState = {
+  orders: []
+};
 
 export const ordersSlice = createSlice({
   name: 'orders',
@@ -37,7 +42,3 @@ export const ordersSlice = createSlice({
 export const ordersReducer = ordersSlice.reducer;
 
 export const {} = ordersSlice.selectors;
-
-// export const selectOrderByNumber =
-//   (number: number | undefined) => (state: RootState) =>
-//     state.ingredients.ingredients.find((item) => item._id === id);

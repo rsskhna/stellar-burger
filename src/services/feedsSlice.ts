@@ -1,6 +1,7 @@
 import { getFeedsApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
+import { RootState } from './store';
 
 export const getFeeds = createAsyncThunk(
   'feeds/getAll',
@@ -55,3 +56,7 @@ export const feedsReducer = feedsSlice.reducer;
 
 export const { selectOrders, selectTotal, selectTotalToday } =
   feedsSlice.selectors;
+
+export const selectOrderByNumber =
+  (number: number | undefined) => (state: RootState) =>
+    state.feeds.orders.find((item) => item.number === number);
