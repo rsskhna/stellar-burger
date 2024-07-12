@@ -14,8 +14,6 @@ export const BurgerIngredients: FC = () => {
   const titleMainRef = useRef<HTMLHeadingElement>(null);
   const titleSaucesRef = useRef<HTMLHeadingElement>(null);
   const ingredients = useSelector(selectIngredients);
-  // const loading = useSelector(getLoadingSelector);
-  // const error = useSelector(getErrorSelector);
 
   const buns = useMemo(
     (): TIngredient[] =>
@@ -64,10 +62,6 @@ export const BurgerIngredients: FC = () => {
     if (tab === 'sauce')
       titleSaucesRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  // if (loading && !error) {
-  //   return <Preloader />;
-  // }
 
   return (
     <BurgerIngredientsUI
