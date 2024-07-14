@@ -14,7 +14,6 @@ export const Login: FC = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

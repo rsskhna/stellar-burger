@@ -16,8 +16,12 @@ import { TUser } from '@utils-types';
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
-  async ({ email, name, password }: TRegisterData) =>
-    await registerUserApi({ email, name, password })
+  async ({ email, name, password }: TRegisterData) => {
+    const data = await registerUserApi({ email, name, password });
+    setCookie('accessToken', data.accessToken);
+    localStorage.setItem('refreshToken', data.refreshToken);
+    return data.user;
+  }
 );
 
 export const loginUser = createAsyncThunk(
@@ -95,13 +99,21 @@ export const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
         state.isAuthChecked = true;
-        console.log(state.error);
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload;
         state.isAuthenticated = true;
         state.loading = false;
         state.isAuthChecked = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.isAuthenticated = true;
+        state.loading = false;
+        state.isAuthChecked = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.data = action.payload.user;
       });
   }
 });

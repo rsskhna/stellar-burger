@@ -56,7 +56,3 @@ export const feedsReducer = feedsSlice.reducer;
 
 export const { selectOrders, selectTotal, selectTotalToday } =
   feedsSlice.selectors;
-
-export const selectOrderByNumber =
-  (number: number | undefined) => (state: RootState) =>
-    state.feeds.orders.find((item) => item.number === number);

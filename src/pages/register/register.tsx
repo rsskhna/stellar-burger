@@ -1,6 +1,6 @@
 import { FC, SyntheticEvent, useState } from 'react';
 import { RegisterUI } from '@ui-pages';
-import { loginUser, registerUser } from '../../services/userSlice';
+import { registerUser } from '../../services/userSlice';
 import { useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,7 +21,6 @@ export const Register: FC = () => {
         password: password
       })
     );
-    dispatch(loginUser({ email, password }));
     navigate('/');
   };
 

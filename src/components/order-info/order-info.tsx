@@ -1,15 +1,25 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { selectIngredients } from '../../services/ingredientsSlice';
 import { useParams } from 'react-router-dom';
-import { selectOrderByNumber } from '../../services/feedsSlice';
+import {
+  getOrderByNumber,
+  selectOrderInfo,
+  selectOrdersLoading
+} from '../../services/ordersSlice';
 
 export const OrderInfo: FC = () => {
   const { number: orderNumber } = useParams();
-  const orderData = useSelector(selectOrderByNumber(Number(orderNumber)));
+  const orderData = useSelector(selectOrderInfo);
+  const loading = useSelector(selectOrdersLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getOrderByNumber(Number(orderNumber)));
+  }, [dispatch]);
 
   const ingredients: TIngredient[] = useSelector(selectIngredients);
 
@@ -55,7 +65,7 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (!orderInfo || loading) {
     return <Preloader />;
   }
 

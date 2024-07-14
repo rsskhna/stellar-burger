@@ -18,11 +18,18 @@ export const placeOrder = createAsyncThunk(
   async (data: string[]) => await orderBurgerApi(data)
 );
 
+export const getOrderByNumber = createAsyncThunk(
+  'orders/getOrderByNumber',
+  async (number: number) => await getOrderByNumberApi(number)
+);
+
 type TOrderState = {
   orders: TOrder[];
   orderModalData: TOrder | null;
   orderRequest: boolean;
-  loading: boolean;
+  orderInfo: TOrder | null;
+  requestLoading: boolean;
+  ordersLoading: boolean;
   error: string | null;
 };
 
@@ -30,7 +37,9 @@ const initialState: TOrderState = {
   orders: [],
   orderModalData: null,
   orderRequest: false,
-  loading: false,
+  orderInfo: null,
+  requestLoading: false,
+  ordersLoading: false,
   error: null
 };
 
@@ -41,38 +50,55 @@ export const orderSlice = createSlice({
   selectors: {
     selectUserOrders: (state) => state.orders,
     selectOrderModalData: (state) => state.orderModalData,
-    selectOrderRequest: (state) => state.orderRequest
+    selectOrderRequest: (state) => state.orderRequest,
+    selectOrdersLoading: (state) => state.ordersLoading,
+    selectOrderInfo: (state) => state.orderInfo
   },
   extraReducers: (builder) => {
     builder
       .addCase(placeOrder.pending, (state) => {
         state.orderRequest = true;
-        state.loading = true;
+        state.requestLoading = true;
         state.error = null;
       })
       .addCase(placeOrder.rejected, (state, action) => {
         state.orderRequest = false;
-        state.loading = false;
+        state.requestLoading = false;
         state.error = action.error.message ? action.error.message : null;
       })
       .addCase(placeOrder.fulfilled, (state, action) => {
         state.orderModalData = action.payload.order;
         state.orderRequest = false;
-        state.loading = false;
+        state.requestLoading = false;
+      })
+      .addCase(getUserOrders.pending, (state) => {
+        state.ordersLoading = true;
+        state.error = null;
       })
       .addCase(getUserOrders.rejected, (state, action) => {
-        state.loading = false;
+        state.ordersLoading = false;
         state.error = action.error.message ? action.error.message : null;
-        console.log(state.error);
       })
       .addCase(getUserOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
-        console.log(action.payload);
+      })
+      .addCase(getOrderByNumber.pending, (state) => {
+        state.ordersLoading = true;
+        state.error = null;
+      })
+      .addCase(getOrderByNumber.fulfilled, (state, action) => {
+        state.ordersLoading = false;
+        state.orderInfo = action.payload.orders[0];
       });
   }
 });
 
 export const orderReducer = orderSlice.reducer;
 
-export const { selectUserOrders, selectOrderModalData, selectOrderRequest } =
-  orderSlice.selectors;
+export const {
+  selectUserOrders,
+  selectOrderModalData,
+  selectOrderRequest,
+  selectOrdersLoading,
+  selectOrderInfo
+} = orderSlice.selectors;
