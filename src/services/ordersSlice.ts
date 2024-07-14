@@ -1,12 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {
-  getOrderByNumberApi,
-  getOrdersApi,
-  orderBurgerApi,
-  TNewOrderResponse
-} from '@api';
-import { RootState } from './store';
-import { TConstructorIngredient, TOrder } from '@utils-types';
+import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
+import { TOrder } from '@utils-types';
 
 export const getUserOrders = createAsyncThunk(
   'orders/getAll',
@@ -46,7 +40,14 @@ const initialState: TOrderState = {
 export const orderSlice = createSlice({
   name: 'order',
   initialState,
-  reducers: {},
+  reducers: {
+    setModalData: (state, action) => {
+      state.orderModalData = action.payload;
+    },
+    setOrderRequest: (state, action) => {
+      state.orderRequest = action.payload;
+    }
+  },
   selectors: {
     selectUserOrders: (state) => state.orders,
     selectOrderModalData: (state) => state.orderModalData,
@@ -94,6 +95,8 @@ export const orderSlice = createSlice({
 });
 
 export const orderReducer = orderSlice.reducer;
+
+export const { setModalData, setOrderRequest } = orderSlice.actions;
 
 export const {
   selectUserOrders,
