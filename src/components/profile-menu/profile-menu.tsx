@@ -7,7 +7,6 @@ import { navigate } from '@storybook/addon-links';
 
 export const ProfileMenu: FC = () => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {

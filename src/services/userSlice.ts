@@ -33,6 +33,7 @@ export const loginUser = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
   'user/logoutUser',
   (_, { dispatch }) => {
+    userLogout();
     logoutApi()
       .then(() => {
         localStorage.clear();

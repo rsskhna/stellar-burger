@@ -8,7 +8,7 @@ import {
 import { RootState } from './store';
 import { TConstructorIngredient, TOrder } from '@utils-types';
 
-export const getOrders = createAsyncThunk(
+export const getUserOrders = createAsyncThunk(
   'orders/getAll',
   async () => await getOrdersApi()
 );
@@ -39,7 +39,7 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {},
   selectors: {
-    selectOrders: (state) => state.orders,
+    selectUserOrders: (state) => state.orders,
     selectOrderModalData: (state) => state.orderModalData,
     selectOrderRequest: (state) => state.orderRequest
   },
@@ -60,13 +60,19 @@ export const orderSlice = createSlice({
         state.orderRequest = false;
         state.loading = false;
       })
-      .addCase(getOrders.fulfilled, (state, action) => {
+      .addCase(getUserOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ? action.error.message : null;
+        console.log(state.error);
+      })
+      .addCase(getUserOrders.fulfilled, (state, action) => {
         state.orders = action.payload;
+        console.log(action.payload);
       });
   }
 });
 
 export const orderReducer = orderSlice.reducer;
 
-export const { selectOrders, selectOrderModalData, selectOrderRequest } =
+export const { selectUserOrders, selectOrderModalData, selectOrderRequest } =
   orderSlice.selectors;

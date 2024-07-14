@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useState } from 'react';
+import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { LoginUI } from '@ui-pages';
 import { useDispatch, useSelector } from '../../services/store';
 import {
@@ -25,10 +25,6 @@ export const Login: FC = () => {
     dispatch(loginUser({ email, password }));
     navigate('/');
   };
-
-  if (isAuthenticated) {
-    navigate('/profile');
-  }
 
   return (
     <LoginUI
