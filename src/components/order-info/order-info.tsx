@@ -10,6 +10,7 @@ import {
   selectOrderInfo,
   selectOrdersLoading
 } from '../../services/ordersSlice';
+import { getFeeds } from '../../services/feedsSlice';
 
 export const OrderInfo: FC = () => {
   const { number: orderNumber } = useParams();
@@ -18,6 +19,7 @@ export const OrderInfo: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getFeeds());
     dispatch(getOrderByNumber(Number(orderNumber)));
   }, [dispatch]);
 

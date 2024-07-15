@@ -18,7 +18,6 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/ingredientsSlice';
-import { getFeeds } from '../../services/feedsSlice';
 import { checkUserAuth } from '../../services/userSlice';
 
 const App = () => {
@@ -30,10 +29,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getIngredients());
-    dispatch(getFeeds());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(checkUserAuth());
   }, [dispatch]);
 

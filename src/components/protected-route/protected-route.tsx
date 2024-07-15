@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { selectIsAuthChecked, selectUserData } from '../../services/userSlice';
+import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 import { Navigate, useLocation } from 'react-router-dom';
 
@@ -13,8 +13,8 @@ export const ProtectedRoute = ({
   onlyUnAuth,
   children
 }: ProtectedRouteProps) => {
-  const isAuthChecked = useSelector(selectIsAuthChecked); // isAuthCheckedSelector — селектор получения состояния загрузки пользователя
-  const user = useSelector(selectUserData); // userDataSelector — селектор получения пользователя из store
+  const isAuthChecked = useSelector(selectIsAuthChecked);
+  const user = useSelector(selectUserData);
   const location = useLocation();
 
   if (!isAuthChecked) {

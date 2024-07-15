@@ -38,15 +38,11 @@ export const logoutUser = createAsyncThunk(
   'user/logoutUser',
   (_, { dispatch }) => {
     userLogout();
-    logoutApi()
-      .then(() => {
-        localStorage.clear();
-        deleteCookie('accessToken');
-        dispatch(userLogout());
-      })
-      .catch(() => {
-        console.log('Ошибка выполнения выхода');
-      });
+    logoutApi().then(() => {
+      localStorage.clear();
+      deleteCookie('accessToken');
+      dispatch(userLogout());
+    });
   }
 );
 
