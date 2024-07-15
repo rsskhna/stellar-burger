@@ -52,6 +52,11 @@ export const updateUser = createAsyncThunk(
     await updateUserApi({ email, name, password })
 );
 
+export const getUser = createAsyncThunk(
+  'user/getUser',
+  async () => await getUserApi()
+);
+
 type TUserState = {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
@@ -110,6 +115,9 @@ export const userSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         state.data = action.payload.user;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.data = action.payload.user;
       });
   }
 });
@@ -118,7 +126,7 @@ export const checkUserAuth = createAsyncThunk(
   'user/checkUser',
   (_, { dispatch }) => {
     if (getCookie('accessToken')) {
-      dispatch(getUserApi).finally(() => {
+      dispatch(getUser()).finally(() => {
         dispatch(authChecked());
       });
     } else {

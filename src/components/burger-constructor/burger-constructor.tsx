@@ -21,7 +21,6 @@ import { useNavigate } from 'react-router-dom';
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const constructorItems = {
     bun: useSelector(selectBurgerBun),
     ingredients: useSelector(selectBurgerIngredients)

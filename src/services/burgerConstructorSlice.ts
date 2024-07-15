@@ -30,7 +30,6 @@ export const burgerConstructorSlice = createSlice({
         } else {
           state.constructorItems.ingredients.push(action.payload);
         }
-        console.log('add component action');
       },
       prepare: (ingredient: TIngredient) => {
         const id = nanoid();
