@@ -6,27 +6,20 @@ describe('проверяем доступность приложения', funct
   it('сервис должен быть доступен по адресу localhost:4000', function () {
     cy.visit(BASE_URL);
   });
+});
 
+describe('перехват запроса', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'api/ingredients', {
-      fixture: 'ingredients.json'
-    });
+    cy.intercept('GET', 'api/ingredients', (req) => {
+      req.reply({
+        fixture: 'ingredients.json'
+      });
+    }).as('getIngredients');
 
     cy.visit(BASE_URL);
   });
 });
 
-describe('Перехват запроса', () => {
-  it('Тест перехвата запроса по эндпоинту', () => {
-    cy.intercept('GET', '/api/ingredients', (req) => {
-      cy.fixture('ingredients.json').then((ingredients) => {
-        req.reply({
-          statusCode: 200,
-          body: ingredients
-        });
-      });
-    }).as('getIngredients');
+describe('корректная работа конструктора', () => {
 
-    cy.visit('http://localhost:4000/');
-  });
 });
