@@ -1,7 +1,11 @@
 import { feedsReducer, getFeeds } from './feedsSlice';
-import { expect } from '@jest/globals';
+import { expect, jest } from '@jest/globals';
 
 describe('feedsReducer async actions tests', () => {
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   const initialState = {
     orders: [],
     total: 0,

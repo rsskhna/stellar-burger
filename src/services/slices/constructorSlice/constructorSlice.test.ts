@@ -6,14 +6,13 @@ import {
   setBunState,
   setIngredientsState
 } from './burgerConstructorSlice';
-import any = jasmine.any;
 
 describe('constructorReducer sync actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
 
-  const constructorState = {
+  const initialState = {
     constructorItems: {
       bun: null,
       ingredients: []
@@ -53,7 +52,7 @@ describe('constructorReducer sync actions tests', () => {
 
   it('add bun to constructor', () => {
     const newState = burgerConstructorReducer(
-      constructorState,
+      initialState,
       addBurgerComponent(ingredientsMock[0])
     );
 
@@ -95,12 +94,12 @@ describe('constructorReducer sync actions tests', () => {
       deleteBurgerComponent(addedIngredient)
     );
 
-    expect(newState).toEqual(constructorState);
+    expect(newState).toEqual(initialState);
   });
 
   it('set bun/ingredient state', () => {
     const stateWithIngredient = burgerConstructorReducer(
-      constructorState,
+      initialState,
       setIngredientsState([{ ...ingredientsMock[0], id: 'ingr' }])
     );
 
