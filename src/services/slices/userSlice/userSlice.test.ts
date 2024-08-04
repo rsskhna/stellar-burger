@@ -1,15 +1,19 @@
-import { authChecked, getUser, loginUser, registerUser, updateUser, userLogout, userReducer } from './userSlice';
-import { expect } from '@jest/globals';
-import { TUser } from '@utils-types';
+import {
+  authChecked,
+  getUser,
+  initialState,
+  loginUser,
+  registerUser,
+  updateUser,
+  userLogout,
+  userReducer
+} from './userSlice';
+import { expect, jest } from '@jest/globals';
 
 describe('userReducer actions tests', () => {
-  const initialState = {
-    isAuthChecked: false,
-    isAuthenticated: false,
-    data: null,
-    error: null,
-    loading: false
-  };
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
 
   const userData = {
     email: 'i.rossokhina@yandex.ru',
@@ -19,13 +23,6 @@ describe('userReducer actions tests', () => {
   const regData = {
     ...userData,
     password: 'password'
-  };
-
-  const authResponse = {
-    success: true,
-    refreshToken: 'refresh',
-    accessToken: 'access',
-    user: userData
   };
 
   it('auth check test', () => {

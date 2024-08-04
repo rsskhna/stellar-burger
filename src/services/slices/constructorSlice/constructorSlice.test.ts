@@ -4,20 +4,14 @@ import {
   burgerConstructorReducer,
   deleteBurgerComponent,
   setBunState,
-  setIngredientsState
+  setIngredientsState,
+  initialState
 } from './burgerConstructorSlice';
 
 describe('constructorReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
-
-  const initialState = {
-    constructorItems: {
-      bun: null,
-      ingredients: []
-    }
-  };
 
   const ingredientsMock = [
     {

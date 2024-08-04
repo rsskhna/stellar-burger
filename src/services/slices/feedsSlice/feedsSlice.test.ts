@@ -1,18 +1,10 @@
-import { feedsReducer, getFeeds } from './feedsSlice';
+import { feedsReducer, getFeeds, initialState } from './feedsSlice';
 import { expect, jest } from '@jest/globals';
 
 describe('feedsReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
-
-  const initialState = {
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    loading: false,
-    error: null
-  };
 
   const feedsData = {
     orders: [

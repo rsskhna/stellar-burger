@@ -5,23 +5,14 @@ import {
   orderReducer,
   placeOrder,
   setModalData,
-  setOrderRequest
+  setOrderRequest,
+  initialState
 } from './ordersSlice';
 
 describe('ordersReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
-
-  const initialState = {
-    orders: [],
-    orderModalData: null,
-    orderRequest: false,
-    orderInfo: null,
-    requestLoading: false,
-    ordersLoading: false,
-    error: null
-  };
 
   const orderInfo = {
     success: true,

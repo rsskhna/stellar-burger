@@ -1,16 +1,10 @@
 import { expect, jest } from '@jest/globals';
-import { getIngredients, ingredientsReducer } from './ingredientsSlice';
+import { getIngredients, ingredientsReducer, initialState } from './ingredientsSlice';
 
 describe('ingredientsReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
-
-  const initialState = {
-    ingredients: [],
-    loading: false,
-    error: null
-  };
 
   const ingredientsData = [
     {
