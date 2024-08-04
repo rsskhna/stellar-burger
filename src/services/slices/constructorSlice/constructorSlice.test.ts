@@ -7,7 +7,7 @@ import {
   setIngredientsState
 } from './burgerConstructorSlice';
 
-describe('constructorReducer sync actions tests', () => {
+describe('constructorReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });

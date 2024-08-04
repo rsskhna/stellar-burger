@@ -1,7 +1,7 @@
 import { expect, jest } from '@jest/globals';
 import { getIngredients, ingredientsReducer } from './ingredientsSlice';
 
-describe('ingredientsReducer async actions tests', () => {
+describe('ingredientsReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });

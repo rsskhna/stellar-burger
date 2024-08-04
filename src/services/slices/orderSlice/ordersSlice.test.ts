@@ -8,7 +8,7 @@ import {
   setOrderRequest
 } from './ordersSlice';
 
-describe('ordersReducer sync actions tests', () => {
+describe('ordersReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });

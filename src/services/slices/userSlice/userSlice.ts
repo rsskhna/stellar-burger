@@ -61,7 +61,7 @@ type TUserState = {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   data: TUser | null;
-  error: SerializedError | null | unknown;
+  error: null | string;
   loading: boolean;
 };
 
@@ -98,7 +98,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error.message ? action.error.message : null;
         state.isAuthChecked = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {

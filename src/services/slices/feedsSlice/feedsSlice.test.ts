@@ -1,7 +1,7 @@
 import { feedsReducer, getFeeds } from './feedsSlice';
 import { expect, jest } from '@jest/globals';
 
-describe('feedsReducer async actions tests', () => {
+describe('feedsReducer actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });
