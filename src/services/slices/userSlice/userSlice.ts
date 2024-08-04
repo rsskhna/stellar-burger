@@ -10,8 +10,8 @@ import {
   registerUserApi,
   TRegisterData,
   updateUserApi
-} from '@api';
-import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
+} from '../../../utils/burger-api';
+import { deleteCookie, getCookie, setCookie } from '../../../utils/cookie';
 import { TUser } from '@utils-types';
 
 export const registerUser = createAsyncThunk(

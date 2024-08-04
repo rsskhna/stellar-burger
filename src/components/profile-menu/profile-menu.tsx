@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { ProfileMenuUI } from '@ui';
-import { logoutUser } from '../../services/userSlice';
+import { logoutUser } from '../../services/slices/userSlice/userSlice';
 import { useDispatch } from '../../services/store';
 import { navigate } from '@storybook/addon-links';
 
