@@ -8,7 +8,7 @@ import {
 } from './burgerConstructorSlice';
 import any = jasmine.any;
 
-describe('constructorReducer', () => {
+describe('constructorReducer sync actions tests', () => {
   afterAll(() => {
     jest.restoreAllMocks();
   });

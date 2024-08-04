@@ -12,7 +12,7 @@ const initialState: TBurgerConstructorState = {
   constructorItems: {
     bun: null,
     ingredients: []
-  },
+  }
 };
 
 export const burgerConstructorSlice = createSlice({
