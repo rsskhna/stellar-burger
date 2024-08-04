@@ -1,4 +1,3 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { feedsReducer, getFeeds } from './feedsSlice';
 import { expect } from '@jest/globals';
 
