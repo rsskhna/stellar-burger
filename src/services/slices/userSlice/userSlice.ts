@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  SerializedError
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   getUserApi,
   loginUserApi,
@@ -10,8 +6,8 @@ import {
   registerUserApi,
   TRegisterData,
   updateUserApi
-} from '@api';
-import { deleteCookie, getCookie, setCookie } from '../utils/cookie';
+} from '../../../utils/burger-api';
+import { deleteCookie, getCookie, setCookie } from '../../../utils/cookie';
 import { TUser } from '@utils-types';
 
 export const registerUser = createAsyncThunk(
@@ -61,11 +57,11 @@ type TUserState = {
   isAuthChecked: boolean;
   isAuthenticated: boolean;
   data: TUser | null;
-  error: SerializedError | null | unknown;
+  error: null | string;
   loading: boolean;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   isAuthenticated: false,
   data: null,
@@ -98,7 +94,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.error.message ? action.error.message : null;
         state.isAuthChecked = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {

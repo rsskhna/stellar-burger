@@ -7,15 +7,15 @@ import {
   selectBurgerIngredients,
   setBunState,
   setIngredientsState
-} from '../../services/burgerConstructorSlice';
+} from '../../services/slices/constructorSlice/burgerConstructorSlice';
 import {
   placeOrder,
   selectOrderModalData,
   selectOrderRequest,
   setModalData,
   setOrderRequest
-} from '../../services/ordersSlice';
-import { selectUserData } from '../../services/userSlice';
+} from '../../services/slices/orderSlice/ordersSlice';
+import { selectUserData } from '../../services/slices/userSlice/userSlice';
 import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {

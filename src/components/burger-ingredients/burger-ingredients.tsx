@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { TIngredient, TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
-import { selectIngredients } from '../../services/ingredientsSlice';
+import { selectIngredients } from '../../services/slices/ingredientsSlice/ingredientsSlice';
 import { useSelector } from '../../services/store';
 import { Preloader } from '@ui';
 

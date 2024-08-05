@@ -6,7 +6,7 @@ import {
   getUserOrders,
   selectOrdersLoading,
   selectUserOrders
-} from '../../services/ordersSlice';
+} from '../../services/slices/orderSlice/ordersSlice';
 import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {
